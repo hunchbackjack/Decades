@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="uk.ac.kent.jds27.demolyric">
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".multiplayer.GameScreen"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="userLandscape"
+            android:theme="@style/AppThemeNoTitle" />
+        <activity
+            android:name=".multiplayer.DecadeSelect"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5118218345788752~8556723972" />
+
+        <activity android:name=".singleplayer.levelselect.TenLevelSelect" />
+        <activity android:name=".singleplayer.GameScreenSingle" />
+        <activity android:name=".singleplayer.DecadeLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.TwentyLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.NinetyLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.EightLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.SevenLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.SixLevelSelect" />
+        <activity android:name=".singleplayer.levelselect.FiveLevelSelect"></activity>
+    </application>
+
+</manifest>
