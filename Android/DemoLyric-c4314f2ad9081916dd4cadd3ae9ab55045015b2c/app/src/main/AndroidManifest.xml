@@ -44,7 +44,7 @@
         <activity android:name=".singleplayer.levelselect.EightLevelSelect" />
         <activity android:name=".singleplayer.levelselect.SevenLevelSelect" />
         <activity android:name=".singleplayer.levelselect.SixLevelSelect" />
-        <activity android:name=".singleplayer.levelselect.FiveLevelSelect"></activity>
+        <activity android:name=".singleplayer.levelselect.FiveLevelSelect" />
     </application>
 
 </manifest>

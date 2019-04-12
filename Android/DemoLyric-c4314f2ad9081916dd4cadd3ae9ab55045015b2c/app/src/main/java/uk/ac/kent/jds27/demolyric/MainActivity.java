@@ -20,7 +20,7 @@ import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
 public class MainActivity extends AppCompatActivity {
 
     //array to store completed levels
-    private static ArrayList<Integer> completedLevels = new ArrayList<>();
+    private final static ArrayList<Integer> completedLevels = new ArrayList<>();
     //buttons
     private Button playButton;
     private Button singlePlayerButton;
