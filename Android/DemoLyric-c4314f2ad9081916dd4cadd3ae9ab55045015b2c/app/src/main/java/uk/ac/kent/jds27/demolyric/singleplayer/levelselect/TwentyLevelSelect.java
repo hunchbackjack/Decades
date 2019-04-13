@@ -21,6 +21,8 @@ public class TwentyLevelSelect extends AppCompatActivity {
     private Button level9Button;
     private Class gameScreen;
 
+    SharedCode sharedCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class TwentyLevelSelect extends AppCompatActivity {
 
         gameScreen = GameScreenSingle.class;
 
+        sharedCode = new SharedCode();
+
         configureButtons();
     }
 
@@ -47,20 +51,20 @@ public class TwentyLevelSelect extends AppCompatActivity {
         //level 1 button
         SharedCode.configureButton(level1Button, this, gameScreen, 201);
         //level 2 button
-        SharedCode.unlockLevel(level2Button, this, gameScreen, 202);
+        sharedCode.unlockLevel(level2Button, this, gameScreen, 202);
         //level 3 button
-        SharedCode.unlockLevel(level3Button, this, gameScreen, 203);
+        sharedCode.unlockLevel(level3Button, this, gameScreen, 203);
         //level 4 button
-        SharedCode.unlockLevel(level4Button, this, gameScreen, 204);
+        sharedCode.unlockLevel(level4Button, this, gameScreen, 204);
         //level 5 button
-        SharedCode.unlockLevel(level5Button, this, gameScreen, 205);
+        sharedCode.unlockLevel(level5Button, this, gameScreen, 205);
         //level 6 button
-        SharedCode.unlockLevel(level6Button, this, gameScreen, 206);
+        sharedCode.unlockLevel(level6Button, this, gameScreen, 206);
         //level 7 button
-        SharedCode.unlockLevel(level7Button, this, gameScreen, 207);
+        sharedCode.unlockLevel(level7Button, this, gameScreen, 207);
         //level 8 button
-        SharedCode.unlockLevel(level8Button, this, gameScreen, 208);
+        sharedCode.unlockLevel(level8Button, this, gameScreen, 208);
         //level 9 button
-        SharedCode.unlockLevel(level9Button, this, gameScreen, 209);
+        sharedCode.unlockLevel(level9Button, this, gameScreen, 209);
     }
 }

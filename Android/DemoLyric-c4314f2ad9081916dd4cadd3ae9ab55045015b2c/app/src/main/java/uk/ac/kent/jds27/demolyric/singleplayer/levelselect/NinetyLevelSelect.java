@@ -16,6 +16,7 @@ public class NinetyLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
+    SharedCode sharedCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,8 @@ public class NinetyLevelSelect extends AppCompatActivity {
 
         gameScreen = GameScreenSingle.class;
 
+        sharedCode = new SharedCode();
+
         configureButtons();
     }
 
@@ -37,8 +40,8 @@ public class NinetyLevelSelect extends AppCompatActivity {
         //level 1 button
         SharedCode.configureButton(level1Button, this, gameScreen, 901);
         //level 2 button
-        SharedCode.unlockLevel(level2Button, this, gameScreen, 902);
+        sharedCode.unlockLevel(level2Button, this, gameScreen, 902);
         //level 3 button
-        SharedCode.unlockLevel(level3Button, this, gameScreen, 903);
+        sharedCode.unlockLevel(level3Button, this, gameScreen, 903);
     }
 }

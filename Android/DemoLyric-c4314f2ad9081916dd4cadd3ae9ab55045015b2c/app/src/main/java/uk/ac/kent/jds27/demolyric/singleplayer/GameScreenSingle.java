@@ -1,7 +1,9 @@
 package uk.ac.kent.jds27.demolyric.singleplayer;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +18,6 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.util.ArrayList;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
-import uk.ac.kent.jds27.demolyric.MainActivity;
 import uk.ac.kent.jds27.demolyric.R;
 import uk.ac.kent.jds27.demolyric.SharedCode;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.EightList;
@@ -29,6 +30,11 @@ import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.TwentyList;
 
 @SuppressWarnings("ALL")
 public class GameScreenSingle extends AppCompatActivity {
+
+    private SharedPreferences sharedPref;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences skipCount;
+    private SharedPreferences.Editor editSkip;
 
     //google ad to load when game completed
     private InterstitialAd mInterstitialAd;
@@ -56,10 +62,12 @@ public class GameScreenSingle extends AppCompatActivity {
     private String songName;
     private String songArtist;
     private String turn;
+    private String currentDecade;
 
     //text view
     private TextView lyricString;
     private TextView turnCount;
+    private TextView skipView;
 
     //int to keep track of round number
     private int count = 0;
@@ -75,6 +83,7 @@ public class GameScreenSingle extends AppCompatActivity {
 
         lyricString = findViewById(R.id.lyricString);
         turnCount = findViewById(R.id.turnCount);
+        skipView = findViewById(R.id.skipView);
         nextButton = findViewById(R.id.nextButton);
         playAgainButton = findViewById(R.id.playAgainButton);
         homeButton = findViewById(R.id.homeButton);
@@ -86,6 +95,8 @@ public class GameScreenSingle extends AppCompatActivity {
         //initialise input variables
         songName = null;
         songArtist = null;
+
+        currentDecade = null;
 
         //varibale to access 1950's lyrics
         FiveList list50 = new FiveList();
@@ -102,131 +113,168 @@ public class GameScreenSingle extends AppCompatActivity {
         //variable to access 2010's lyrics
         TenList list10 = new TenList();
 
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPref.edit();
+
+        skipCount = PreferenceManager.getDefaultSharedPreferences(this);
+        editSkip = skipCount.edit();
+
         //determine level to play
         switch (DecadeLevelSelect.levelSelect) {
             //1950 level 1
             case 501:
                 getLevelList(list50.getLevel1List());
+                currentDecade = "50";
                 break;
             //1950 level 2
             case 502:
                 getLevelList(list50.getLevel2List());
+                currentDecade = "50";
                 break;
             //1960 level 1
             case 601:
                 getLevelList(list60.getLevel1List());
+                currentDecade = "60";
                 break;
             //1960 level 2
             case 602:
                 getLevelList(list60.getLevel2List());
+                currentDecade = "60";
                 break;
             //1970 level 1
             case 701:
                 getLevelList(list70.getLevel1List());
+                currentDecade = "70";
                 break;
             //1970 level 2
             case 702:
                 getLevelList(list70.getLevel2List());
+                currentDecade = "70";
                 break;
             //1970 level 3
             case 703:
                 getLevelList(list70.getLevel3List());
+                currentDecade = "70";
                 break;
             //1980 level 1
             case 801:
                 getLevelList(list80.getLevel1List());
+                currentDecade = "80";
                 break;
             //1980 level 2
             case 802:
                 getLevelList(list80.getLevel2List());
+                currentDecade = "80";
                 break;
             //1980 level 3
             case 803:
                 getLevelList(list80.getLevel3List());
+                currentDecade = "80";
                 break;
             //1990 level 1
             case 901:
                 getLevelList(list90.getLevel1List());
+                currentDecade = "90";
                 break;
             //1990 level 2
             case 902:
                 getLevelList(list90.getLevel2List());
+                currentDecade = "90";
                 break;
             //1990 level 3
             case 903:
                 getLevelList(list90.getLevel3List());
+                currentDecade = "90";
                 break;
             //2000 level 1
             case 201:
                 getLevelList(list20.getLevel1List());
+                currentDecade = "20";
                 break;
             //2000 level 2
             case 202:
                 getLevelList(list20.getLevel2List());
+                currentDecade = "20";
                 break;
             //2000 level 3
             case 203:
                 getLevelList(list20.getLevel3List());
+                currentDecade = "20";
                 break;
             //2000 level 4
             case 204:
                 getLevelList(list20.getLevel4List());
+                currentDecade = "20";
                 break;
             //2000 level 5
             case 205:
                 getLevelList(list20.getLevel5List());
+                currentDecade = "20";
                 break;
             //2000 level 6
             case 206:
                 getLevelList(list20.getLevel6List());
+                currentDecade = "20";
                 break;
             //2000 level 7
             case 207:
                 getLevelList(list20.getLevel7List());
+                currentDecade = "20";
                 break;
             //2000 level 8
             case 208:
                 getLevelList(list20.getLevel8List());
+                currentDecade = "20";
                 break;
             //2000 level 9
             case 209:
                 getLevelList(list20.getLevel9List());
+                currentDecade = "20";
                 break;
             //2010 level 1
             case 101:
                 getLevelList(list10.getLevel1List());
+                currentDecade = "10";
                 break;
             //2010 level 2
             case 102:
                 getLevelList(list10.getLevel2List());
+                currentDecade = "10";
                 break;
             //2010 level 3
             case 103:
                 getLevelList(list10.getLevel3List());
+                currentDecade = "10";
                 break;
             //2010 level 4
             case 104:
                 getLevelList(list10.getLevel4List());
+                currentDecade = "10";
                 break;
             //2010 level 5
             case 105:
                 getLevelList(list10.getLevel5List());
+                currentDecade = "10";
                 break;
             //2010 level 6
             case 106:
                 getLevelList(list10.getLevel6List());
+                currentDecade = "10";
                 break;
             //2010 level 7
             case 107:
                 getLevelList(list10.getLevel7List());
+                currentDecade = "10";
                 break;
             //2010 level 8
             case 108:
                 getLevelList(list10.getLevel8List());
+                currentDecade = "10";
                 break;
             //2010 level 9
             case 109:
                 getLevelList(list10.getLevel9List());
+                currentDecade = "10";
                 break;
         }
 
@@ -238,6 +286,8 @@ public class GameScreenSingle extends AppCompatActivity {
 
         //reset the level select
         DecadeLevelSelect.levelSelect = 0;
+
+        skipView.setText("Skips: " + skipCount.getInt(currentDecade, 0));
 
         //load interstitial ad
         mInterstitialAd = new InterstitialAd(this);
@@ -277,9 +327,13 @@ public class GameScreenSingle extends AppCompatActivity {
             //load new advert for next time
             mInterstitialAd = SharedCode.loadAd(this);
             //change to game complete screen
-            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton);
-            //add level to completed array
-            MainActivity.addCompletedLevel(currentLevel);
+            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
+
+            if (!sharedPref.contains("Level completed" + currentLevel)) {
+                addToSharedPreferences(currentLevel);
+                editor.apply();
+            }
+
             //reset the song list
             tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
         }
@@ -298,7 +352,7 @@ public class GameScreenSingle extends AppCompatActivity {
             //get random lyric and answers
             turn = access.getLyric(tempSongs);
             //catch null pointer exception
-            if(turn != null) {
+            if (turn != null) {
                 //split string to get just the lyric
                 String[] turnList = turn.split(System.lineSeparator());
                 String lyric = turnList[0];
@@ -310,8 +364,7 @@ public class GameScreenSingle extends AppCompatActivity {
                 songArtist = getArtist[0];
                 //display the lyric
                 lyricString.setText(lyric);
-            }
-            else {
+            } else {
                 //if null, send to home activity
                 SharedCode.goHome(this);
             }
@@ -353,67 +406,83 @@ public class GameScreenSingle extends AppCompatActivity {
      * @param View view
      */
     public void skipGo(View view) {
-        //check advert is loaded
-        if (mInterstitialAd.isLoaded()) {
-            //show advert
-            mInterstitialAd.show();
+        if (skipCount.getInt(currentDecade, 0) > 0) {
+            //check advert is loaded
+            if (mInterstitialAd.isLoaded()) {
+                //show advert
+                mInterstitialAd.show();
 
-            //load new advert for next time
-            mInterstitialAd = new InterstitialAd(this);
-            mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        } else {
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
-        }
-        //display answer after 1 second to give the ad time to load
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //display answer
-                lyricString.setText(turn);
-                //set enter fields and buttons to invisible
-                enterArtist.setVisibility(View.INVISIBLE);
-                enterName.setVisibility(View.INVISIBLE);
-                submitButton.setVisibility(View.INVISIBLE);
-                skipButton.setVisibility(View.INVISIBLE);
-                //make next button visible
-                nextButton.setVisibility(View.VISIBLE);
+                //load new advert for next time
+                mInterstitialAd = new InterstitialAd(this);
+                mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
             }
-        }, 1000);
+            //display answer after 1 second to give the ad time to load
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //display answer
+                    lyricString.setText(turn);
+                    //set enter fields and buttons to invisible
+                    enterArtist.setVisibility(View.INVISIBLE);
+                    enterName.setVisibility(View.INVISIBLE);
+                    submitButton.setVisibility(View.INVISIBLE);
+                    skipButton.setVisibility(View.INVISIBLE);
+                    //make next button visible
+                    nextButton.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+            Log.d("skipCount", "Skip count: " + skipCount.getAll());
+            int skipNo = skipCount.getInt(currentDecade, 1);
+            editSkip.putInt(currentDecade, skipNo-1);
+            editSkip.apply();
+            skipView.setText("Skips: " + skipCount.getInt(currentDecade, 0));
+        } else {
+                Toast toast = Toast.makeText(this, "Out of skips", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+
+        /*
+         * Method to start the game again.
+         * Resets the count to 0 and initiates the game with haveGo().
+         * @param View view
+         */
+        public void playAgain (View view){
+            //reset round number and call playAgain function
+            count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+            //set lyric string to random lyric
+            haveGo(playAgainButton);
+        }
+
+        /*
+         * Method to go back to the home screen.
+         * @param View view
+         */
+        public void goHome (View view){
+            SharedCode.goHome(this);
+        }
+
+        /*
+         * Method to fuzzy match two strings.
+         * Uses separate library, check dependencies.
+         * @param String x, String y
+         */
+        @SuppressWarnings("unused")
+        private int fuzzyMatch (String x, String y){
+            //make both strings lower case for more accurate match
+            String a = x.toLowerCase().trim();
+            String b = y.toLowerCase().trim();
+            return FuzzySearch.ratio(a, b);
+        }
+
+        public void addToSharedPreferences ( int i){
+            editor.putInt("Level completed " + i, i).apply();
+        }
+
     }
 
-    /*
-     * Method to start the game again.
-     * Resets the count to 0 and initiates the game with haveGo().
-     * @param View view
-     */
-    public void playAgain(View view) {
-        //reset round number and call playAgain function
-        count = SharedCode.playAgain(nextButton, playAgainButton, homeButton);
-        //set lyric string to random lyric
-        haveGo(playAgainButton);
-    }
-
-    /*
-     * Method to go back to the home screen.
-     * @param View view
-     */
-    public void goHome(View view) {
-        SharedCode.goHome(this);
-    }
-
-    /*
-     * Method to fuzzy match two strings.
-     * Uses separate library, check dependencies.
-     * @param String x, String y
-     */
-    @SuppressWarnings("unused")
-    private int fuzzyMatch(String x, String y) {
-        //make both strings lower case for more accurate match
-        String a = x.toLowerCase();
-        String b = y.toLowerCase();
-        return FuzzySearch.ratio(a, b);
-    }
-}
 

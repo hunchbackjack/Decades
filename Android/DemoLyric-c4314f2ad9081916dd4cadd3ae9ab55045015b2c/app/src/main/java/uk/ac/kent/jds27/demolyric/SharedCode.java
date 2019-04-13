@@ -2,6 +2,8 @@ package uk.ac.kent.jds27.demolyric;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +17,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
+import uk.ac.kent.jds27.demolyric.singleplayer.GameScreenSingle;
 
 /*
  * Class to store shared code for the project
  */
 public class SharedCode {
+
+    static GameScreenSingle gameScreenSingle = new GameScreenSingle();
 
     /*
      * Method to get random string from an array.
@@ -70,9 +75,10 @@ public class SharedCode {
      * Method to show game completed screen
      * @param TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton
      */
-    public static void gameComplete(TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton) {
+    public static void gameComplete(TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton, TextView turnCount) {
         lyricString.setText(context.getString(R.string.game_complete));
         nextButton.setVisibility(View.INVISIBLE);
+        turnCount.setVisibility(View.INVISIBLE);
         homeButton.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
     }
@@ -121,11 +127,12 @@ public class SharedCode {
      * Method to restart the game
      * @param Button nextButton, Button playAgainButton, Button homeButton
      */
-    public static int playAgain(Button nextButton, Button playAgainButton, Button homeButton) {
+    public static int playAgain(Button nextButton, Button playAgainButton, Button homeButton, TextView turnCount) {
         //reset the round number
         int count = 0;
         //display next button
         nextButton.setVisibility(View.VISIBLE);
+        turnCount.setVisibility(View.VISIBLE);
         //hide play again and home buttons
         playAgainButton.setVisibility(View.INVISIBLE);
         homeButton.setVisibility(View.INVISIBLE);
@@ -144,19 +151,13 @@ public class SharedCode {
     /*
      * Method to unlock level.
      */
-    public static void unlockLevel(Button levelButton, final Context context, final Class destination, final int level) {
-        Log.d("unlocklevel", "level " + level);
+    public void unlockLevel(Button levelButton, final Context context, final Class destination, final int level) {
         Integer prevLevel = level-1;
-        Boolean found = false;
-        for(Integer lev : MainActivity.getCompletedLevels()) {
-            Log.d("unlocklevel", "lev " + lev);
-            Log.d("unlocklevel", "prevLevel " + prevLevel);
-            if(lev.equals(prevLevel)) {
-                Log.d("unlocklevel", "found  " + found);
-                found = true;
-                configureButton(levelButton, context, destination, level);
-            }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if(preferences.contains("Level completed " + prevLevel)) {
+            configureButton(levelButton, context, destination, level);
         }
+
     }
 }
 

@@ -17,6 +17,8 @@ public class SevenLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
+    SharedCode sharedCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,8 @@ public class SevenLevelSelect extends AppCompatActivity {
         level4Button = findViewById(R.id.level704Button);
         gameScreen = GameScreenSingle.class;
 
+        sharedCode = new SharedCode();
+
         configureButtons();
     }
 
@@ -35,10 +39,10 @@ public class SevenLevelSelect extends AppCompatActivity {
         //level 1 button
         SharedCode.configureButton(level1Button, this, gameScreen, 701);
         //level 2 button
-        SharedCode.unlockLevel(level2Button, this, gameScreen, 702);
+        sharedCode.unlockLevel(level2Button, this, gameScreen, 702);
         //level 3 button
-        SharedCode.unlockLevel(level3Button, this, gameScreen, 703);
+        sharedCode.unlockLevel(level3Button, this, gameScreen, 703);
         //level 4 button
-        SharedCode.unlockLevel(level4Button, this, gameScreen, 704);
+        sharedCode.unlockLevel(level4Button, this, gameScreen, 704);
     }
 }

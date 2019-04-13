@@ -140,7 +140,7 @@ public class GameScreen extends AppCompatActivity {
             //load new advert for next time
             mInterstitialAd = SharedCode.loadAd(this);
             //change to game complete screen
-            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton);
+            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
             //reset the song list
             tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
         }
@@ -174,7 +174,7 @@ public class GameScreen extends AppCompatActivity {
      */
     public void playAgain(View view) {
         //reset round number and call playAgain function
-        count = SharedCode.playAgain(nextButton, playAgainButton, homeButton);
+        count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
         //set lyric string to random lyric
         haveGo(nextButton);
     }

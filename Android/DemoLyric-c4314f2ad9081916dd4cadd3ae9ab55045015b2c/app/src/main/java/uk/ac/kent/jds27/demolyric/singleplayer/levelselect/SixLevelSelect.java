@@ -15,6 +15,8 @@ public class SixLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
+    SharedCode sharedCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,8 @@ public class SixLevelSelect extends AppCompatActivity {
         level2Button = findViewById(R.id.level602Button);
         gameScreen = GameScreenSingle.class;
 
+        sharedCode = new SharedCode();
+
         configureButtons();
     }
 
@@ -31,6 +35,6 @@ public class SixLevelSelect extends AppCompatActivity {
         //level 1 button
         SharedCode.configureButton(level1Button, this, gameScreen, 601);
         //level 2 button
-        SharedCode.unlockLevel(level2Button, this, gameScreen, 602);
+        sharedCode.unlockLevel(level2Button, this, gameScreen, 602);
     }
 }

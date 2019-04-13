@@ -1,10 +1,12 @@
 package uk.ac.kent.jds27.demolyric;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,18 +14,17 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
-import java.util.ArrayList;
-
 import uk.ac.kent.jds27.demolyric.multiplayer.DecadeSelect;
 import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
 
 public class MainActivity extends AppCompatActivity {
 
-    //array to store completed levels
-    private final static ArrayList<Integer> completedLevels = new ArrayList<>();
     //buttons
     private Button playButton;
     private Button singlePlayerButton;
+
+    private SharedPreferences skipCount;
+    private SharedPreferences.Editor editSkip;
 
     //layout
     private ConstraintLayout howToConstraint;
@@ -46,12 +47,29 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+        skipCount = PreferenceManager.getDefaultSharedPreferences(this);
+        editSkip = skipCount.edit();
+
+        if(skipCount.getBoolean("firstTimeRun", true)) {
+
+            editSkip.putInt("50", 3);
+            editSkip.putInt("60", 3);
+            editSkip.putInt("70", 3);
+            editSkip.putInt("80", 3);
+            editSkip.putInt("90", 3);
+            editSkip.putInt("20", 3);
+            editSkip.putInt("10", 3);
+
+            editSkip.putBoolean("firstTimeRun", false);
+
+            editSkip.apply();
+        }
+
         configurePlayButton();
         configureSingleButton();
 
         //reset the level select
         DecadeLevelSelect.levelSelect = 0;
-
     }
 
     /*
@@ -86,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showHowTo(View view) {
         howToConstraint.setVisibility(View.VISIBLE);
-        Log.d("MainActivity", "Completed Levels: " + completedLevels);
     }
 
     /*
@@ -95,20 +112,6 @@ public class MainActivity extends AppCompatActivity {
      */
     public void closeHowTo(View view) {
         howToConstraint.setVisibility(View.INVISIBLE);
-    }
-
-    /*
-     * Method to get the list of completed levels.
-     */
-    public static ArrayList<Integer> getCompletedLevels() {
-        return completedLevels;
-    }
-
-    /*
-     * Method to add levels to completed levels list.
-     */
-    public static void addCompletedLevel(Integer level) {
-        completedLevels.add(level);
     }
 
 }
