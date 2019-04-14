@@ -12,21 +12,36 @@
         tools:context=".activity_leve1">
 
         <Button
-            android:id="@+id/homeButton"
-            android:layout_width="wrap_content"
+            android:id="@+id/nextLevelButton"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="goHome"
-            android:text="@string/home"
+            android:text="@string/next_level"
             android:textColor="@android:color/background_light"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playAgainButton" />
+
+        <Button
+            android:id="@+id/homeButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/home"
+            android:textColor="@android:color/background_light"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nextLevelButton" />
 
         <Button
             android:id="@+id/playAgainButton"
@@ -39,7 +54,6 @@
             android:layout_marginBottom="16dp"
             android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
-            android:onClick="playAgain"
             android:text="@string/play_again"
             android:textColor="@android:color/background_light"
             android:visibility="invisible"

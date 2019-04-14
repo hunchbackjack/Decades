@@ -21,7 +21,7 @@ public class TwentyLevelSelect extends AppCompatActivity {
     private Button level9Button;
     private Class gameScreen;
 
-    SharedCode sharedCode;
+    private SharedCode sharedCode;
 
 
     @Override

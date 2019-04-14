@@ -17,7 +17,7 @@ public class SevenLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
-    SharedCode sharedCode;
+    private SharedCode sharedCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

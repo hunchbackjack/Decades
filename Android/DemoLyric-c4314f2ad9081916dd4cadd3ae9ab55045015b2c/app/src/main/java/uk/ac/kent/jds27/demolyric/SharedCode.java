@@ -17,14 +17,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
-import uk.ac.kent.jds27.demolyric.singleplayer.GameScreenSingle;
 
 /*
  * Class to store shared code for the project
  */
 public class SharedCode {
-
-    static GameScreenSingle gameScreenSingle = new GameScreenSingle();
 
     /*
      * Method to get random string from an array.

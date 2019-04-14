@@ -15,7 +15,7 @@ public class FiveLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
-    SharedCode sharedCode;
+    private SharedCode sharedCode;
 
 
     @Override

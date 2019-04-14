@@ -16,7 +16,7 @@ public class EightLevelSelect extends AppCompatActivity {
 
     private Class gameScreen;
 
-    SharedCode sharedCode;
+    private SharedCode sharedCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

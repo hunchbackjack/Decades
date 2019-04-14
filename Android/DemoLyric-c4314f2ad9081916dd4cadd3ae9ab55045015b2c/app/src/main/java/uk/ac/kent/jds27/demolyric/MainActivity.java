@@ -1,6 +1,5 @@
 package uk.ac.kent.jds27.demolyric;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -23,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private Button playButton;
     private Button singlePlayerButton;
 
-    private SharedPreferences skipCount;
-    private SharedPreferences.Editor editSkip;
-
     //layout
     private ConstraintLayout howToConstraint;
 
@@ -47,19 +43,46 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        skipCount = PreferenceManager.getDefaultSharedPreferences(this);
-        editSkip = skipCount.edit();
+        SharedPreferences skipCount = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editSkip = skipCount.edit();
 
+        //check if it's the first run
         if(skipCount.getBoolean("firstTimeRun", true)) {
 
-            editSkip.putInt("50", 3);
-            editSkip.putInt("60", 3);
-            editSkip.putInt("70", 3);
-            editSkip.putInt("80", 3);
-            editSkip.putInt("90", 3);
-            editSkip.putInt("20", 3);
-            editSkip.putInt("10", 3);
+            //3 skips per level
+            editSkip.putInt("501", 3);
+            editSkip.putInt("502", 3);
+            editSkip.putInt("601", 3);
+            editSkip.putInt("602", 3);
+            editSkip.putInt("701", 3);
+            editSkip.putInt("702", 3);
+            editSkip.putInt("703", 3);
+            editSkip.putInt("801", 3);
+            editSkip.putInt("802", 3);
+            editSkip.putInt("803", 3);
+            editSkip.putInt("901", 3);
+            editSkip.putInt("902", 3);
+            editSkip.putInt("903", 3);
+            editSkip.putInt("201", 3);
+            editSkip.putInt("202", 3);
+            editSkip.putInt("203", 3);
+            editSkip.putInt("204", 3);
+            editSkip.putInt("205", 3);
+            editSkip.putInt("206", 3);
+            editSkip.putInt("207", 3);
+            editSkip.putInt("208", 3);
+            editSkip.putInt("209", 3);
+            editSkip.putInt("101", 3);
+            editSkip.putInt("102", 3);
+            editSkip.putInt("103", 3);
+            editSkip.putInt("104", 3);
+            editSkip.putInt("105", 3);
+            editSkip.putInt("106", 3);
+            editSkip.putInt("107", 3);
+            editSkip.putInt("108", 3);
+            editSkip.putInt("109", 3);
 
+            //set first time run variable to false so skips won't be added again
             editSkip.putBoolean("firstTimeRun", false);
 
             editSkip.apply();

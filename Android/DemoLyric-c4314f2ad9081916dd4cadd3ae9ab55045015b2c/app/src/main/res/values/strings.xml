@@ -36,4 +36,6 @@
     <string name="zero">0</string>
     <string name="level_8">Level 8</string>
     <string name="level_9">Level 9</string>
+    <string name="next_level">Next Level</string>
+    <string name="skips">Skips:</string>
 </resources>
