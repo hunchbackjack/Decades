@@ -16,14 +16,23 @@ import com.google.android.gms.ads.MobileAds;
 import uk.ac.kent.jds27.demolyric.multiplayer.DecadeSelect;
 import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
 
+/*
+ * Class to display initial home screen
+ */
 public class MainActivity extends AppCompatActivity {
 
     //buttons
     private Button playButton;
     private Button singlePlayerButton;
+    private Button showHowToButton;
+    private Button hideHowToButton;
 
     //layout
     private ConstraintLayout howToConstraint;
+
+    //shared preferences
+    private SharedPreferences skipCount;
+    private SharedPreferences.Editor editSkip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +44,69 @@ public class MainActivity extends AppCompatActivity {
         playButton = findViewById(R.id.playButton);
         howToConstraint = findViewById(R.id.howToConstraint);
         singlePlayerButton = findViewById(R.id.singlePlayerButton);
+        showHowToButton = findViewById(R.id.showHowToButton);
+        hideHowToButton = findViewById(R.id.hideHowToButton);
 
-        MobileAds.initialize(this, "ca-app-pub-5118218345788752~8556723972");
+        //load banner ad
+        loadBannerAd();
 
-        //banner ad
-        AdView mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //load shared preferences
+        skipCount = PreferenceManager.getDefaultSharedPreferences(this);
+        editSkip = skipCount.edit();
+        editSkip.apply();
 
-        SharedPreferences skipCount = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editSkip = skipCount.edit();
+        //set up first time run
+        checkFirstRun();
 
+        //set on click listeners for buttons
+        configureButtons();
+    }
+
+    /*
+     * Method to configure buttons.
+     * Sets on click listener.
+     */
+    private void configureButtons() {
+        //set method for play button
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DecadeSelect.class));
+            }
+        });
+
+        //set method for single player button
+        singlePlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DecadeLevelSelect.class));
+            }
+        });
+
+        //set method for showing how to
+        showHowToButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                howToConstraint.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        //set method for hiding how to
+        hideHowToButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                howToConstraint.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    /*
+     * Method for setting up first time run
+     */
+    public void checkFirstRun() {
         //check if it's the first run
-        if(skipCount.getBoolean("firstTimeRun", true)) {
-
+        if (skipCount.getBoolean("firstTimeRun", true)) {
             //3 skips per level
             editSkip.putInt("501", 3);
             editSkip.putInt("502", 3);
@@ -87,54 +145,17 @@ public class MainActivity extends AppCompatActivity {
 
             editSkip.apply();
         }
-
-        configurePlayButton();
-        configureSingleButton();
-
-        //reset the level select
-        DecadeLevelSelect.levelSelect = 0;
     }
 
     /*
-     * Method to configure play button.
-     * Sets on click listener and points to decade select page
+     * Method to load banner ad
      */
-    private void configurePlayButton() {
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, DecadeSelect.class));
-            }
-        });
+    public void loadBannerAd() {
+        //initialise ad (currently with test id)
+        MobileAds.initialize(this, "ca-app-pub-5118218345788752~8556723972");
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //load ad
+        mAdView.loadAd(adRequest);
     }
-
-    /*
-     * Method to configure single player button.
-     * Sets on click listener and points to decade select page
-     */
-    private void configureSingleButton() {
-        singlePlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, DecadeLevelSelect.class));
-            }
-        });
-    }
-
-    /*
-     * Method to display the how to modulo.
-     * @param View view
-     */
-    public void showHowTo(View view) {
-        howToConstraint.setVisibility(View.VISIBLE);
-    }
-
-    /*
-     * Method to close the how to modulo.
-     * @param View view
-     */
-    public void closeHowTo(View view) {
-        howToConstraint.setVisibility(View.INVISIBLE);
-    }
-
 }

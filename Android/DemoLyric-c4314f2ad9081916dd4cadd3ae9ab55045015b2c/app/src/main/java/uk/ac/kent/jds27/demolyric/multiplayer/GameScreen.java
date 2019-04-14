@@ -1,6 +1,5 @@
 package uk.ac.kent.jds27.demolyric.multiplayer;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -85,30 +84,13 @@ public class GameScreen extends AppCompatActivity {
         cTimer = null;
 
         //check which decades have been selected and add to lists
-        if (DecadeSelect.fiveClicked) {
-            addDecade(la.getFiveList());
-        }
-        if (DecadeSelect.sixClicked) {
-            addDecade(la.getSixList());
-        }
-        if (DecadeSelect.sevenClicked) {
-            addDecade(la.getSevenList());
-        }
-        if (DecadeSelect.eightClicked) {
-            addDecade(la.getEightList());
-        }
-        if (DecadeSelect.nineClicked) {
-            addDecade(la.getNineList());
-        }
-        if (DecadeSelect.twentyClicked) {
-            addDecade(la.getTwentyList());
-        }
-        if (DecadeSelect.tenClicked) {
-            addDecade(la.getTenList());
-        }
+        checkDecades();
+
+        //set methods for all buttons
+        configureButtons();
 
         //set initial lyric
-        haveGo(nextButton);
+        haveGo();
 
         //load interstitial ad
         mInterstitialAd = SharedCode.loadAd(this);
@@ -121,7 +103,7 @@ public class GameScreen extends AppCompatActivity {
      * @param View view
      */
     @SuppressWarnings({"WeakerAccess", "unused"})
-    public void haveGo(View view) {
+    public void haveGo() {
         //increase round number
         count++;
         //check if round number is less than total number of rounds
@@ -141,8 +123,11 @@ public class GameScreen extends AppCompatActivity {
             mInterstitialAd = SharedCode.loadAd(this);
             //change to game complete screen
             SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
-            //reset the song list
-            tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
+            //check if there's enough songs in list to do another round
+            if(tempSongs.size() < goCount) {
+                //reset the song list
+                tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
+            }
         }
         //if round number is less than total number of rounds initiate a new round
         else {
@@ -154,12 +139,10 @@ public class GameScreen extends AppCompatActivity {
             lyricString.setText(turn);
             //initiate a new count down
             cTimer = new CountDownTimer(timeCount, 1000) {
-
-                @SuppressLint("SetTextI18n")
                 public void onTick(long millisUntilFinished) {
-                    timer.setText("" + millisUntilFinished / 1000);
+                    String newTime = "" + millisUntilFinished / 1000;
+                    timer.setText(newTime);
                 }
-
                 public void onFinish() {
                     timer.setText(getString(R.string.zero));
                 }
@@ -168,15 +151,36 @@ public class GameScreen extends AppCompatActivity {
     }
 
     /*
-     * Method to start the game again.
-     * Resets the count to 0 and initiates the game with haveGo().
-     * @param View view
+     * Method to set methods for all buttons.
      */
-    public void playAgain(View view) {
-        //reset round number and call playAgain function
-        count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
-        //set lyric string to random lyric
-        haveGo(nextButton);
+    private void configureButtons() {
+        //set method for next button
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                haveGo();
+            }
+        });
+
+        //set method for play again button
+        playAgainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //reset round number and call playAgain function
+                count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+                //set lyric string to random lyric
+                haveGo();
+            }
+        });
+
+        //set method for home button
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedCode.goHome(GameScreen.this);
+            }
+        });
+
     }
 
     /*
@@ -197,7 +201,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     /*
-     * Method to change time per round
+     * Method to change time per round.
      * @param View view
      */
     public void submitTimeCount(View view) {
@@ -223,7 +227,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     /*
-     * Method to display edit texts to input new number of rounds
+     * Method to display edit texts to input new number of rounds.
      * @param View view
      */
     public void changeTurnCount(View view) {
@@ -232,7 +236,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     /*
-     * Method to change number of rounds
+     * Method to change number of rounds.
      * @param View view
      */
     public void submitTurnCount(View view) {
@@ -267,11 +271,38 @@ public class GameScreen extends AppCompatActivity {
     }
 
     /*
-     * Method to add songs from specified decades into the game
+     * Method to add songs from specified decades into the game.
      * @param ArrayList<String> array
      */
     private void addDecade(ArrayList<String> array) {
         tempSongs.addAll(array);
         resetList.addAll(array);
+    }
+
+    /*
+     * Method to check which decades have been selected and add them to song list.
+     */
+    private void checkDecades() {
+        if (DecadeSelect.fiveClicked) {
+            addDecade(la.getFiveList());
+        }
+        if (DecadeSelect.sixClicked) {
+            addDecade(la.getSixList());
+        }
+        if (DecadeSelect.sevenClicked) {
+            addDecade(la.getSevenList());
+        }
+        if (DecadeSelect.eightClicked) {
+            addDecade(la.getEightList());
+        }
+        if (DecadeSelect.nineClicked) {
+            addDecade(la.getNineList());
+        }
+        if (DecadeSelect.twentyClicked) {
+            addDecade(la.getTwentyList());
+        }
+        if (DecadeSelect.tenClicked) {
+            addDecade(la.getTenList());
+        }
     }
 }

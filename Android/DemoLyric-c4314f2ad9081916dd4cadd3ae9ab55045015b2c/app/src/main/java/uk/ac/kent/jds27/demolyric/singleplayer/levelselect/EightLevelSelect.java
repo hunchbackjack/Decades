@@ -35,9 +35,15 @@ public class EightLevelSelect extends AppCompatActivity {
         configureButtons();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configureButtons();
+    }
+
     private void configureButtons() {
         //level 1 button
-        SharedCode.configureButton(level1Button, this, gameScreen, 801);
+        SharedCode.configureLevelButton(level1Button, this, gameScreen, 801);
         //level 2 button
         sharedCode.unlockLevel(level2Button, this, gameScreen, 802);
         //level 3 button

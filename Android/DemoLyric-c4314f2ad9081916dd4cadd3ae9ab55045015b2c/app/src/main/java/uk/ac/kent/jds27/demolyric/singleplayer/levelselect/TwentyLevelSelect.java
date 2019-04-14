@@ -47,9 +47,18 @@ public class TwentyLevelSelect extends AppCompatActivity {
         configureButtons();
     }
 
+    /*
+     * Method to refresh the buttons after returning from game
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configureButtons();
+    }
+
     private void configureButtons() {
         //level 1 button
-        SharedCode.configureButton(level1Button, this, gameScreen, 201);
+        SharedCode.configureLevelButton(level1Button, this, gameScreen, 201);
         //level 2 button
         sharedCode.unlockLevel(level2Button, this, gameScreen, 202);
         //level 3 button

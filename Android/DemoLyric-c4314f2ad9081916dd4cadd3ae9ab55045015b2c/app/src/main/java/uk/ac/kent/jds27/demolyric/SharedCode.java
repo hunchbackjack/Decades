@@ -49,11 +49,11 @@ public class SharedCode {
     }
 
     /*
-     * Method to configure a button.
+     * Method to configure a level select button.
      * sets the onclick listener to set the levelSelect variable, and point to the destination class
      * @param Button button, Context context, Class destination, int level, all final
      */
-    public static void configureButton(final Button button, final Context context, final Class destination, final int level) {
+    public static void configureLevelButton(final Button button, final Context context, final Class destination, final int level) {
         //set backgroundColor
         button.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
         //set on click listener
@@ -73,9 +73,12 @@ public class SharedCode {
      * @param TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton
      */
     public static void gameComplete(TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton, TextView turnCount) {
+        //display "Game complete!"
         lyricString.setText(context.getString(R.string.game_complete));
+        //hide unused buttons
         nextButton.setVisibility(View.INVISIBLE);
         turnCount.setVisibility(View.INVISIBLE);
+        //show needed buttons
         homeButton.setVisibility(View.VISIBLE);
         playAgainButton.setVisibility(View.VISIBLE);
     }
@@ -149,12 +152,14 @@ public class SharedCode {
      * Method to unlock level.
      */
     public void unlockLevel(Button levelButton, final Context context, final Class destination, final int level) {
+        //get previous level
         Integer prevLevel = level-1;
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        //check if preferences contains previous level
         if(preferences.contains("Level completed " + prevLevel)) {
-            configureButton(levelButton, context, destination, level);
+            //unlock button
+            configureLevelButton(levelButton, context, destination, level);
         }
-
     }
 }
 

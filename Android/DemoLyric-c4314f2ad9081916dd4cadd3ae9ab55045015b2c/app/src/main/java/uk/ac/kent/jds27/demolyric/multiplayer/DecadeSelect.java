@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import uk.ac.kent.jds27.demolyric.R;
@@ -157,9 +158,12 @@ public class DecadeSelect extends AppCompatActivity {
      * @param View view, Boolean button
      */
     private void changeButtonColour(View view, Boolean button) {
+        //check if button has been selected
         if (!button) {
+            //change to dark primary colour
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         } else {
+            //change to primary colour
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
     }

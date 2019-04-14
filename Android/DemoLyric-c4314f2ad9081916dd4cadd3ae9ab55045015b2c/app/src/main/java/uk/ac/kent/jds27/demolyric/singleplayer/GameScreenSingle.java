@@ -65,6 +65,9 @@ public class GameScreenSingle extends AppCompatActivity {
     private EditText enterName;
     private EditText enterArtist;
 
+    //rewarded video ad functionality
+    private RewardedVideoAdListener listener;
+
     //strings
     private String songName;
     private String songArtist;
@@ -79,8 +82,10 @@ public class GameScreenSingle extends AppCompatActivity {
     private int count = 0;
     //variable to store the level
     private int currentLevel;
+    //variable to store total number of rounds
+    private int goCount;
 
-    int nextLevel;
+    private int nextLevel;
 
     //variable to access 1950's lyrics
     private FiveList list50;
@@ -120,6 +125,7 @@ public class GameScreenSingle extends AppCompatActivity {
         songName = null;
         songArtist = null;
 
+        //initialise list variables
         list50 = new FiveList();
         list60 = new SixList();
         list70 = new SevenList();
@@ -137,24 +143,25 @@ public class GameScreenSingle extends AppCompatActivity {
         //determine level to play
         getLevelList(levelSelect(DecadeLevelSelect.levelSelect));
 
-        //set current level as level selected
+        //set current level
         currentLevel = DecadeLevelSelect.levelSelect;
 
+        //set next level
         nextLevel = currentLevel + 1;
 
         //reset the level select
         DecadeLevelSelect.levelSelect = 0;
 
-        int getSkipPrefs = skipCount.getInt(Integer.toString(currentLevel), 0);
-        String setSkips = getString(R.string.skips) + getSkipPrefs;
-        skipView.setText(setSkips);
+        //set the skip count
+        newSkipCount();
 
         //load interstitial ad
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        RewardedVideoAdListener listener = new RewardedVideoAdListener() {
+        //load rewarded ad
+        listener = new RewardedVideoAdListener() {
             @Override
             public void onRewardedVideoAdLoaded() {
             }
@@ -205,16 +212,22 @@ public class GameScreenSingle extends AppCompatActivity {
             }
         };
 
-        //load rewarded ad
+        //initialise advert
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(listener);
+        //load advert
         loadRewardedVideoAd();
 
+        //set total number of rounds
+        goCount = 10;
+
+        //configure button functionality
         configureButtons();
 
         //initialise lyric string
         haveGo();
+
     }
 
     /*
@@ -229,9 +242,11 @@ public class GameScreenSingle extends AppCompatActivity {
      * Method to add all songs from an array to tempSongs and resetList
      * @param ArrayList array
      */
-    public void getLevelList(ArrayList<String> array) {
+    private void getLevelList(ArrayList<String> array) {
+        //clear the current lists
         tempSongs.clear();
         resetList.clear();
+        //reset them with the new array
         tempSongs.addAll(array);
         resetList.addAll(array);
     }
@@ -242,13 +257,11 @@ public class GameScreenSingle extends AppCompatActivity {
      * If count is >= number of rounds then a random lyric is displayed.
      * @param View view
      */
-    public void haveGo() {
+    private void haveGo() {
         loadRewardedVideoAd();
         //increase count every turn
         count++;
         //display round number
-        //total number of rounds
-        int goCount = 10;
         turnCount.setText(new StringBuilder().append(count).append("/").append(goCount));
 
         //when count is greater than goCount, level is complete
@@ -260,17 +273,19 @@ public class GameScreenSingle extends AppCompatActivity {
             //change to game complete screen
             SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
 
-            if (levelSelect(nextLevel).size() > 0) {
-                nextLevelButton.setVisibility(View.VISIBLE);
-            }
-
+            //check if current level is contained in sharedPref list
             if (!sharedPref.contains("Level completed" + currentLevel)) {
+                //add current level to it
                 addToSharedPreferences(currentLevel);
+                //apply changes
                 editor.apply();
             }
 
-            //reset the song list
-            tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
+            //check if there is an array for the next level
+            if (levelSelect(nextLevel).size() > 0) {
+                //set next level button to visible
+                nextLevelButton.setVisibility(View.VISIBLE);
+            }
         }
         //when count is less than goCount, display random lyric
         else {
@@ -328,9 +343,19 @@ public class GameScreenSingle extends AppCompatActivity {
             nextButton.setVisibility(View.VISIBLE);
             lyricString.setText(getString(R.string.correct));
         }
-        //if match isn't at least 80% display toast notification
-        else {
+        //if both matches aren't at least 80% display toast notification
+        else if (artistMatch <= 80 && nameMatch <= 80){
             Toast toast = Toast.makeText(this, "Incorrect", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        //if artist match isn't at least 80% display toast notification
+        else if (artistMatch <= 80) {
+            Toast toast = Toast.makeText(this, "Incorrect artist", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        //if song name match isn't at least 80% display toast notification
+        else {
+            Toast toast = Toast.makeText(this, "Incorrect song name", Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -341,9 +366,11 @@ public class GameScreenSingle extends AppCompatActivity {
      * @param View view
      */
     public void skipGo(View view) {
+        //check that skip count for current level is greater than 0
         if (skipCount.getInt("" + currentLevel, 0) > 0) {
             //check advert is loaded
             if (mRewardedVideoAd.isLoaded()) {
+                //show advert
                 mRewardedVideoAd.show();
                 //load new advert for next time
                 loadRewardedVideoAd();
@@ -351,12 +378,17 @@ public class GameScreenSingle extends AppCompatActivity {
                 Log.d("TAG", "The rewarded ad wasn't loaded yet.");
             }
         } else {
+            //display error message
             Toast toast = Toast.makeText(this, "Out of skips", Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
-    void configureButtons() {
+    /*
+     * Method to set methods for all buttons.
+     */
+    private void configureButtons() {
+        //set method for next button
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -364,9 +396,12 @@ public class GameScreenSingle extends AppCompatActivity {
             }
         });
 
+        //set method for play again button
         playAgainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //reset the song list
+                tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
                 //reset round number and call playAgain function
                 count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
                 nextLevelButton.setVisibility(View.INVISIBLE);
@@ -375,6 +410,7 @@ public class GameScreenSingle extends AppCompatActivity {
             }
         });
 
+        //set method for home button
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -382,18 +418,19 @@ public class GameScreenSingle extends AppCompatActivity {
             }
         });
 
+        //set method for next level button
         nextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getLevelList(levelSelect(nextLevel));
+                //reset round number and call playAgain function
+                count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+                haveGo();
+                nextLevelButton.setVisibility(View.INVISIBLE);
+                DecadeLevelSelect.levelSelect = nextLevel;
+                currentLevel = DecadeLevelSelect.levelSelect;
                 nextLevel = currentLevel + 1;
-                if (levelSelect(nextLevel).size() > 0) {
-                    getLevelList(levelSelect(nextLevel));
-                    //reset round number and call playAgain function
-                    count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
-                    haveGo();
-                    nextLevelButton.setVisibility(View.INVISIBLE);
-                    DecadeLevelSelect.levelSelect = nextLevel;
-                }
+
             }
         });
     }
@@ -412,18 +449,19 @@ public class GameScreenSingle extends AppCompatActivity {
     }
 
     /*
-     * Method to add a variable to shared preferences list
+     * Method to add a variable to shared preferences list.
      * @param int i
      */
-    public void addToSharedPreferences(int i) {
+    private void addToSharedPreferences(int i) {
         editor.putInt("Level completed " + i, i).apply();
     }
 
     /*
-     * Method to select the current level and return the array
+     * Method to select the current level and return the array.
      * @param int level
      */
-    ArrayList<String> levelSelect(int level) {
+    private ArrayList<String> levelSelect(int level) {
+        //arraylist to store songs from selected level
         ArrayList<String> selectedLevel = new ArrayList<>();
         switch (level) {
             //1950 level 1
@@ -558,13 +596,22 @@ public class GameScreenSingle extends AppCompatActivity {
         return selectedLevel;
     }
 
+    /*
+     * Method to refresh the skip count.
+     */
     private void newSkipCount() {
+        //get skipCount from shared preferences
         int skipNo = skipCount.getInt("" + currentLevel, 1);
+        //create editor
         SharedPreferences.Editor editSkip = skipCount.edit();
+        //decrease skip count by 1
         editSkip.putInt("" + currentLevel, skipNo - 1);
         editSkip.apply();
+        //get new skip count
         int getSkipPrefs = skipCount.getInt(Integer.toString(currentLevel), 0);
+        //concatenate variables
         String setSkips = getString(R.string.skips) + getSkipPrefs;
+        //set the text field
         skipView.setText(setSkips);
     }
 }

@@ -40,13 +40,13 @@
         app:layout_constraintTop_toBottomOf="@+id/playButton" />
 
     <Button
+        android:id="@+id/showHowToButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_iconfinder_circle_help_question_mark_outline_stroke_763433"
         android:backgroundTint="@android:color/darker_gray"
-        android:onClick="showHowTo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,12 +114,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <Button
+            android:id="@+id/hideHowToButton"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:onClick="closeHowTo"
             android:text="@string/x"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
