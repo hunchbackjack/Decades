@@ -3,6 +3,7 @@ package uk.ac.kent.jds27.demolyric.multiplayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -283,6 +284,13 @@ public class GameScreen extends AppCompatActivity {
      * Method to check which decades have been selected and add them to song list.
      */
     private void checkDecades() {
+        System.out.println("Five: " + DecadeSelect.fiveClicked);
+        System.out.println("Six: " + DecadeSelect.sixClicked);
+        System.out.println("Seven: " + DecadeSelect.sevenClicked);
+        System.out.println("Eight: " + DecadeSelect.eightClicked);
+        System.out.println("Nine: " + DecadeSelect.nineClicked);
+        System.out.println("Twenty: " + DecadeSelect.twentyClicked);
+        System.out.println("Ten: " + DecadeSelect.tenClicked);
         if (DecadeSelect.fiveClicked) {
             addDecade(la.getFiveList());
         }

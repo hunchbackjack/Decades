@@ -42,114 +42,35 @@ public class DecadeSelect extends AppCompatActivity {
     }
 
     /*
-     * Method to add 1950's lyrics
+     * Method to add a decade to the list
      * @param View view
      */
-    public void addFifties(View view) {
-        //call colour change method
-        changeButtonColour(view, fiveClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!fiveClicked) {
-            fiveClicked = true;
-        } else {
-            fiveClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 1960's lyrics
-     * @param View view
-     */
-    public void addSixties(View view) {
-        //call colour change method
-        changeButtonColour(view, sixClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!sixClicked) {
-            sixClicked = true;
-        } else {
-            sixClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 1970's lyrics
-     * @param View view
-     */
-    public void addSeventies(View view) {
-        //call colour change method
-        changeButtonColour(view, sevenClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!sevenClicked) {
-            sevenClicked = true;
-        } else {
-            sevenClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 1980's lyrics
-     * @param View view
-     */
-    public void addEighties(View view) {
-        //call colour change method
-        changeButtonColour(view, eightClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!eightClicked) {
-            eightClicked = true;
-        } else {
-            eightClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 1990's lyrics
-     * @param View view
-     */
-    public void addNineties(View view) {
-        //call colour change method
-        changeButtonColour(view, nineClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!nineClicked) {
-            nineClicked = true;
-        } else {
-            nineClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 2000's lyrics
-     * @param View view
-     */
-    public void addNoughties(View view) {
-        //call colour change method
-        changeButtonColour(view, twentyClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!twentyClicked) {
-            twentyClicked = true;
-        } else {
-            twentyClicked = false;
-        }
-    }
-
-    /*
-     * Method to add 2010's lyrics
-     * @param View view
-     */
-    public void addTens(View view) {
-        //call colour change method
-        changeButtonColour(view, tenClicked);
-        //change decade clicked boolean
-        //noinspection RedundantIfStatement
-        if (!tenClicked) {
-            tenClicked = true;
-        } else {
-            tenClicked = false;
+    public void addDecade(View view) {
+        //get text from button
+        Button b = (Button)view;
+        String decade = b.getText().toString();
+        switch (decade) {
+            case "50's":
+                fiveClicked = changeButtonColour(view, fiveClicked);
+                break;
+            case "60's":
+                sixClicked = changeButtonColour(view, sixClicked);
+                break;
+            case "70's":
+                sevenClicked = changeButtonColour(view, sevenClicked);
+                break;
+            case "80's":
+                eightClicked = changeButtonColour(view, eightClicked);
+                break;
+            case "90's":
+                nineClicked = changeButtonColour(view, nineClicked);
+                break;
+            case "00's":
+                twentyClicked = changeButtonColour(view, twentyClicked);
+                break;
+            case "10's":
+                tenClicked = changeButtonColour(view, tenClicked);
+                break;
         }
     }
 
@@ -157,15 +78,20 @@ public class DecadeSelect extends AppCompatActivity {
      * Method to change a buttons colour
      * @param View view, Boolean button
      */
-    private void changeButtonColour(View view, Boolean button) {
+    private Boolean changeButtonColour(View view, Boolean button) {
         //check if button has been selected
         if (!button) {
+            //set boolean to true
+            button = true;
             //change to dark primary colour
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         } else {
+            //set boolean to false
+            button = false;
             //change to primary colour
             view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
+        return button;
     }
 
     /*
