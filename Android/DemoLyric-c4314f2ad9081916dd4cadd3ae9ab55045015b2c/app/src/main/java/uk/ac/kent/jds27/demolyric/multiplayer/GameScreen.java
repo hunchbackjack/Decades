@@ -107,11 +107,6 @@ public class GameScreen extends AppCompatActivity {
     public void haveGo() {
         //increase round number
         count++;
-        //check if round number is less than total number of rounds
-        if (count <= goCount) {
-            //display round number
-            turnCount.setText(new StringBuilder().append(count).append("/").append(goCount));
-        }
         //cancel timer from previous round
         if (cTimer != null) {
             cTimer.cancel();
@@ -132,6 +127,8 @@ public class GameScreen extends AppCompatActivity {
         }
         //if round number is less than total number of rounds initiate a new round
         else {
+            //display round number
+            turnCount.setText(new StringBuilder().append(count).append("/").append(goCount));
             //make listSize equal to total number of songs left in tempSongs
             listSize = tempSongs.size();
             //get new song string
@@ -284,13 +281,6 @@ public class GameScreen extends AppCompatActivity {
      * Method to check which decades have been selected and add them to song list.
      */
     private void checkDecades() {
-        System.out.println("Five: " + DecadeSelect.fiveClicked);
-        System.out.println("Six: " + DecadeSelect.sixClicked);
-        System.out.println("Seven: " + DecadeSelect.sevenClicked);
-        System.out.println("Eight: " + DecadeSelect.eightClicked);
-        System.out.println("Nine: " + DecadeSelect.nineClicked);
-        System.out.println("Twenty: " + DecadeSelect.twentyClicked);
-        System.out.println("Ten: " + DecadeSelect.tenClicked);
         if (DecadeSelect.fiveClicked) {
             addDecade(la.getFiveList());
         }
