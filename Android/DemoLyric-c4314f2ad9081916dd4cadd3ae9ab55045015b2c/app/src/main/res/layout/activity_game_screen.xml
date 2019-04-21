@@ -15,7 +15,6 @@
         android:layout_marginEnd="16dp"
         android:background="@color/colorPrimary"
         android:backgroundTint="@color/colorPrimary"
-        android:onClick="goHome"
         android:text="@string/home"
         android:textColor="@android:color/background_light"
         android:visibility="invisible"
@@ -62,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lyricString" />
 
     <Button
+        android:id="@+id/timerButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -147,6 +147,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
+        android:id="@+id/countButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="0dp"

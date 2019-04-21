@@ -70,24 +70,6 @@ public class DecadeLevelSelect extends AppCompatActivity {
     }
 
     /*
-     * Method to change the buttons background colour, and then reset it after 50ms
-     * @param Button button
-     */
-    private void changeBackgroundColor(Button button) {
-        final Button but = button;
-        //change button colour when clicked
-        but.setBackgroundColor(ContextCompat.getColor(DecadeLevelSelect.this, R.color.colorPrimaryDark));
-        //reset button background colour after 50ms
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                but.setBackgroundColor(ContextCompat.getColor(DecadeLevelSelect.this, R.color.colorPrimary));
-            }
-        }, 50);
-    }
-
-    /*
      * Method to configure buttons.
      * Sets on click listener, changes button colour, and points to specific level select.
      * @param Button button, Class destination
@@ -96,12 +78,21 @@ public class DecadeLevelSelect extends AppCompatActivity {
         //set final to be accessed from inner method
         final Class dest = destination;
         final Button but = button;
+
         //set on click listener for button
         but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //change button background colour
-                changeBackgroundColor(but);
+                //change button colour when clicked
+                but.setBackgroundColor(ContextCompat.getColor(DecadeLevelSelect.this, R.color.colorPrimaryDark));
+                //reset button background colour after 50ms
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        but.setBackgroundColor(ContextCompat.getColor(DecadeLevelSelect.this, R.color.colorPrimary));
+                    }
+                }, 50);
                 //point button to specific level select
                 startActivity(new Intent(DecadeLevelSelect.this, dest));
             }

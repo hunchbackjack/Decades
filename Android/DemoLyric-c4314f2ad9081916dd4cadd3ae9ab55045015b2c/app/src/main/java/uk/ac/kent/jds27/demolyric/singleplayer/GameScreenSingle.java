@@ -65,9 +65,6 @@ public class GameScreenSingle extends AppCompatActivity {
     private EditText enterName;
     private EditText enterArtist;
 
-    //rewarded video ad functionality
-    private RewardedVideoAdListener listener;
-
     //strings
     private String songName;
     private String songArtist;
@@ -161,7 +158,8 @@ public class GameScreenSingle extends AppCompatActivity {
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         //load rewarded ad
-        listener = new RewardedVideoAdListener() {
+        //rewarded video ad functionality
+        RewardedVideoAdListener listener = new RewardedVideoAdListener() {
             @Override
             public void onRewardedVideoAdLoaded() {
             }
@@ -193,7 +191,8 @@ public class GameScreenSingle extends AppCompatActivity {
 
             @Override
             public void onRewardedVideoAdFailedToLoad(int i) {
-
+                Toast toast = Toast.makeText(GameScreenSingle.this, "Skip video could not load", Toast.LENGTH_LONG);
+                toast.show();
             }
 
             @Override
@@ -261,9 +260,6 @@ public class GameScreenSingle extends AppCompatActivity {
         loadRewardedVideoAd();
         //increase count every turn
         count++;
-        //display round number
-        turnCount.setText(new StringBuilder().append(count).append("/").append(goCount));
-
         //when count is greater than goCount, level is complete
         if (count > goCount) {
             //show an advert
@@ -289,6 +285,8 @@ public class GameScreenSingle extends AppCompatActivity {
         }
         //when count is less than goCount, display random lyric
         else {
+            //display round number
+            turnCount.setText(new StringBuilder().append(count).append("/").append(goCount));
             //reset enter artist and name fields
             enterArtist.setText("");
             enterName.setText("");

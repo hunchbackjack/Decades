@@ -3,7 +3,6 @@ package uk.ac.kent.jds27.demolyric.multiplayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +41,8 @@ public class GameScreen extends AppCompatActivity {
     private Button homeButton;
     private Button turnSubmit;
     private Button timeSubmit;
+    private Button timeButton;
+    private Button countButton;
 
     //edit texts
     private EditText editTurn;
@@ -81,6 +82,8 @@ public class GameScreen extends AppCompatActivity {
         timeSubmit = findViewById(R.id.timeSubmit);
         editTime = findViewById(R.id.editTime);
         homeButton = findViewById(R.id.homeButton);
+        timeButton = findViewById(R.id.timerButton);
+        countButton = findViewById(R.id.countButton);
 
         cTimer = null;
 
@@ -120,7 +123,7 @@ public class GameScreen extends AppCompatActivity {
             //change to game complete screen
             SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
             //check if there's enough songs in list to do another round
-            if(tempSongs.size() < goCount) {
+            if (tempSongs.size() < goCount) {
                 //reset the song list
                 tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
             }
@@ -179,93 +182,84 @@ public class GameScreen extends AppCompatActivity {
             }
         });
 
-    }
-
-    /*
-     * Method to go back to the home screen.
-     * @param View view
-     */
-    public void goHome(View view) {
-        SharedCode.goHome(this);
-    }
-
-    /*
-     * Method to display edit texts to input new timer value
-     * @param View view
-     */
-    public void changeTimeCount(View view) {
-        editTime.setVisibility(View.VISIBLE);
-        timeSubmit.setVisibility(View.VISIBLE);
-    }
-
-    /*
-     * Method to change time per round.
-     * @param View view
-     */
-    public void submitTimeCount(View view) {
-        //get user input string
-        String value = editTime.getText().toString();
-        //check that user input is a number
-        try {
-            //get the input value as int
-            int time = Integer.parseInt(value);
-            //set time count
-            timeCount = time * 1000;
-        }
-        //handle exception if not a number
-        catch (NumberFormatException ex) {
-            //display popup error message
-            Toast toast = Toast.makeText(this, "Please input a number", Toast.LENGTH_LONG);
-            toast.show();
-        }
-
-        //hide edit texts
-        editTime.setVisibility(View.INVISIBLE);
-        timeSubmit.setVisibility(View.INVISIBLE);
-    }
-
-    /*
-     * Method to display edit texts to input new number of rounds.
-     * @param View view
-     */
-    public void changeTurnCount(View view) {
-        editTurn.setVisibility(View.VISIBLE);
-        turnSubmit.setVisibility(View.VISIBLE);
-    }
-
-    /*
-     * Method to change number of rounds.
-     * @param View view
-     */
-    public void submitTurnCount(View view) {
-        //get user input value
-        String value = editTurn.getText().toString();
-        //check that user input is a number
-        try {
-            //get user input as an int
-            int turn = Integer.parseInt(value);
-            //check if number of turns is greater than number of songs in list
-            if (turn > listSize) {
-                //display popup error message
-                Toast sizeToast = Toast.makeText(this, "Please input " + listSize + " or lower.", Toast.LENGTH_LONG);
-                sizeToast.show();
+        //set method to initiate timer change
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //make submit button and edit text visible
+                editTime.setVisibility(View.VISIBLE);
+                timeSubmit.setVisibility(View.VISIBLE);
             }
-            //check if number of turns is less than or equal to number of songs in list
-            else {
-                //change number of rounds to specified user input
-                goCount = turn;
-            }
-        }
-        //handle exception if not a number
-        catch (NumberFormatException ex) {
-            //display popup error message
-            Toast toast = Toast.makeText(this, "Please input a number", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        });
 
-        //hide edit texts
-        editTurn.setVisibility(View.INVISIBLE);
-        turnSubmit.setVisibility(View.INVISIBLE);
+        //set method to submit time change
+        timeSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //get user input string
+                int time = Integer.parseInt(editTime.getText().toString());
+                //check that user input is a number
+                try {
+                    //set time count
+                    timeCount = time * 1000;
+                }
+                //handle exception if not a number
+                catch (NumberFormatException ex) {
+                    //display popup error message
+                    Toast toast = Toast.makeText(GameScreen.this, "Please input a number", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                //hide edit texts
+                editTime.setVisibility(View.INVISIBLE);
+                timeSubmit.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        //set method to initiate round count change
+        countButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //make submit button and edit text visible
+                editTurn.setVisibility(View.VISIBLE);
+                turnSubmit.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //set method to submit round count change
+        turnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //get user input value
+                int turn = Integer.parseInt(editTurn.getText().toString());
+                //check that user input is a number
+                try {
+                    //check if number of turns is greater than number of songs in list
+                    if (turn > listSize) {
+                        //display popup error message
+                        Toast sizeToast = Toast.makeText(GameScreen.this, "Please input " + listSize + " or lower.", Toast.LENGTH_LONG);
+                        sizeToast.show();
+                    }
+                    //check if number of turns is less than or equal to number of songs in list
+                    else {
+                        //change number of rounds to specified user input
+                        goCount = turn;
+                    }
+                }
+                //handle exception if not a number
+                catch (NumberFormatException ex) {
+                    //display popup error message
+                    Toast toast = Toast.makeText(GameScreen.this, "Please input a number", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                //hide edit texts
+                editTurn.setVisibility(View.INVISIBLE);
+                turnSubmit.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
 
     /*
