@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     /*
      * Method for setting up first time run
      */
-    public void checkFirstRun() {
+    private void checkFirstRun() {
         //check if it's the first run
         if (skipCount.getBoolean("firstTimeRun", true)) {
             //3 skips per level
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     /*
      * Method to load banner ad
      */
-    public void loadBannerAd() {
+    private void loadBannerAd() {
         //initialise ad (currently with test id)
         MobileAds.initialize(this, "ca-app-pub-5118218345788752~8556723972");
         AdView mAdView = findViewById(R.id.adView);

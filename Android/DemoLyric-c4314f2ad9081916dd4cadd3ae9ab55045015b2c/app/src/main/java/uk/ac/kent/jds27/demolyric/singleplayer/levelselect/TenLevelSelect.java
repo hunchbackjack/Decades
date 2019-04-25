@@ -1,14 +1,12 @@
 package uk.ac.kent.jds27.demolyric.singleplayer.levelselect;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import uk.ac.kent.jds27.demolyric.R;
-import uk.ac.kent.jds27.demolyric.SharedCode;
 import uk.ac.kent.jds27.demolyric.singleplayer.GameScreenSingle;
 
-public class TenLevelSelect extends AppCompatActivity {
+public class TenLevelSelect extends LevelSelect {
 
     private Button level1Button;
     private Button level2Button;
@@ -21,9 +19,6 @@ public class TenLevelSelect extends AppCompatActivity {
     private Button level9Button;
 
     private Class gameScreen;
-
-    private SharedCode sharedCode;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +38,6 @@ public class TenLevelSelect extends AppCompatActivity {
 
         gameScreen = GameScreenSingle.class;
 
-        sharedCode = new SharedCode();
-
         configureButtons();
     }
 
@@ -59,22 +52,22 @@ public class TenLevelSelect extends AppCompatActivity {
 
     private void configureButtons() {
         //level 1 button
-        SharedCode.configureLevelButton(level1Button, this, gameScreen, 101);
+        configureLevelButton(level1Button, this, gameScreen, 101);
         //level 2 button
-        sharedCode.unlockLevel(level2Button, this, gameScreen, 102);
+        unlockLevel(level2Button, this, gameScreen, 102);
         //level 3 button
-        sharedCode.unlockLevel(level3Button, this, gameScreen, 103);
+        unlockLevel(level3Button, this, gameScreen, 103);
         //level 4 button
-        sharedCode.unlockLevel(level4Button, this, gameScreen, 104);
+        unlockLevel(level4Button, this, gameScreen, 104);
         //level 5 button
-        sharedCode.unlockLevel(level5Button, this, gameScreen, 105);
+        unlockLevel(level5Button, this, gameScreen, 105);
         //level 6 button
-        sharedCode.unlockLevel(level6Button, this, gameScreen, 106);
+        unlockLevel(level6Button, this, gameScreen, 106);
         //level 7 button
-        sharedCode.unlockLevel(level7Button, this, gameScreen, 107);
+        unlockLevel(level7Button, this, gameScreen, 107);
         //level 8 button
-        sharedCode.unlockLevel(level8Button, this, gameScreen, 108);
+        unlockLevel(level8Button, this, gameScreen, 108);
         //level 9 button
-        sharedCode.unlockLevel(level9Button, this, gameScreen, 109);
+        unlockLevel(level9Button, this, gameScreen, 109);
     }
 }

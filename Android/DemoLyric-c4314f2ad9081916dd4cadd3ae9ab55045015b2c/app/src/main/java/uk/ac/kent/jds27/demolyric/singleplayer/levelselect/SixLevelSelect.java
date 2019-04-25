@@ -1,21 +1,17 @@
 package uk.ac.kent.jds27.demolyric.singleplayer.levelselect;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
 import uk.ac.kent.jds27.demolyric.R;
-import uk.ac.kent.jds27.demolyric.SharedCode;
 import uk.ac.kent.jds27.demolyric.singleplayer.GameScreenSingle;
 
-public class SixLevelSelect extends AppCompatActivity {
+public class SixLevelSelect extends LevelSelect {
 
     private Button level1Button;
     private Button level2Button;
 
     private Class gameScreen;
-
-    private SharedCode sharedCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +21,6 @@ public class SixLevelSelect extends AppCompatActivity {
         level1Button = findViewById(R.id.level601Button);
         level2Button = findViewById(R.id.level602Button);
         gameScreen = GameScreenSingle.class;
-
-        sharedCode = new SharedCode();
 
         configureButtons();
     }
@@ -42,8 +36,8 @@ public class SixLevelSelect extends AppCompatActivity {
 
     private void configureButtons() {
         //level 1 button
-        SharedCode.configureLevelButton(level1Button, this, gameScreen, 601);
+        configureLevelButton(level1Button, this, gameScreen, 601);
         //level 2 button
-        sharedCode.unlockLevel(level2Button, this, gameScreen, 602);
+        unlockLevel(level2Button, this, gameScreen, 602);
     }
 }

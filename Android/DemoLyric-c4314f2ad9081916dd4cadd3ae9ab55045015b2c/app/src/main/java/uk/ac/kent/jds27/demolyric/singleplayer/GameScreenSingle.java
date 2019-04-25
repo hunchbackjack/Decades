@@ -3,7 +3,6 @@ package uk.ac.kent.jds27.demolyric.singleplayer;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,8 +20,8 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import java.util.ArrayList;
 
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import uk.ac.kent.jds27.demolyric.Game;
 import uk.ac.kent.jds27.demolyric.R;
-import uk.ac.kent.jds27.demolyric.SharedCode;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.EightList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.FiveList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.NinetyList;
@@ -31,7 +30,7 @@ import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.SixList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.TenList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.TwentyList;
 
-public class GameScreenSingle extends AppCompatActivity {
+public class GameScreenSingle extends Game {
 
     //shared preference to reference levels completed
     private SharedPreferences sharedPref;
@@ -44,9 +43,6 @@ public class GameScreenSingle extends AppCompatActivity {
 
     //google ad to load when skipping
     private RewardedVideoAd mRewardedVideoAd;
-
-    //variable to access shared code
-    private final SharedCode access = new SharedCode();
 
     //list to hold lyrics to current game
     private ArrayList<String> tempSongs = new ArrayList<>();
@@ -263,11 +259,11 @@ public class GameScreenSingle extends AppCompatActivity {
         //when count is greater than goCount, level is complete
         if (count > goCount) {
             //show an advert
-            SharedCode.showAd(mInterstitialAd);
+            showAd(mInterstitialAd);
             //load new advert for next time
-            mInterstitialAd = SharedCode.loadAd(this);
+            mInterstitialAd = loadAd(this);
             //change to game complete screen
-            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
+            gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
 
             //check if current level is contained in sharedPref list
             if (!sharedPref.contains("Level completed" + currentLevel)) {
@@ -298,7 +294,7 @@ public class GameScreenSingle extends AppCompatActivity {
             //hide next button
             nextButton.setVisibility(View.INVISIBLE);
             //get random lyric and answers
-            turn = access.getLyric(tempSongs);
+            turn = getLyric(tempSongs);
             //catch null pointer exception
             if (turn != null) {
                 //split string to get just the lyric
@@ -314,7 +310,7 @@ public class GameScreenSingle extends AppCompatActivity {
                 lyricString.setText(lyric);
             } else {
                 //if null, send to home activity
-                SharedCode.goHome(this);
+                goHome(this);
             }
         }
     }
@@ -399,9 +395,10 @@ public class GameScreenSingle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //reset the song list
-                tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
+                //noinspection ConstantConditions
+                tempSongs = resetList(tempSongs, resetList, goCount);
                 //reset round number and call playAgain function
-                count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+                count = playAgain(nextButton, playAgainButton, homeButton, turnCount);
                 nextLevelButton.setVisibility(View.INVISIBLE);
                 //set lyric string to random lyric
                 haveGo();
@@ -412,7 +409,7 @@ public class GameScreenSingle extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedCode.goHome(GameScreenSingle.this);
+                goHome(GameScreenSingle.this);
             }
         });
 
@@ -422,7 +419,7 @@ public class GameScreenSingle extends AppCompatActivity {
             public void onClick(View v) {
                 getLevelList(levelSelect(nextLevel));
                 //reset round number and call playAgain function
-                count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+                count = playAgain(nextButton, playAgainButton, homeButton, turnCount);
                 haveGo();
                 nextLevelButton.setVisibility(View.INVISIBLE);
                 DecadeLevelSelect.levelSelect = nextLevel;

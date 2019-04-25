@@ -2,9 +2,7 @@ package uk.ac.kent.jds27.demolyric;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,18 +14,13 @@ import com.google.android.gms.ads.InterstitialAd;
 import java.util.ArrayList;
 import java.util.Random;
 
-import uk.ac.kent.jds27.demolyric.singleplayer.DecadeLevelSelect;
-
-/*
- * Class to store shared code for the project
- */
-public class SharedCode {
+public class Game extends AppCompatActivity {
 
     /*
      * Method to get random string from an array.
      * @param ArrayList<String> array
      */
-    public String getLyric(ArrayList<String> array) {
+    protected String getLyric(ArrayList<String> array) {
         //set lyric to null to avoid not initialised error
         String randomLyric = null;
         //check that array size is greater than 0 to avoid null pointer exception
@@ -49,30 +42,10 @@ public class SharedCode {
     }
 
     /*
-     * Method to configure a level select button.
-     * sets the onclick listener to set the levelSelect variable, and point to the destination class
-     * @param Button button, Context context, Class destination, int level, all final
-     */
-    public static void configureLevelButton(final Button button, final Context context, final Class destination, final int level) {
-        //set backgroundColor
-        button.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary));
-        //set on click listener
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //set levelSelect variable
-                DecadeLevelSelect.levelSelect = level;
-                //changes activity
-                context.startActivity(new Intent(context, destination));
-            }
-        });
-    }
-
-    /*
      * Method to show game completed screen
      * @param TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton
      */
-    public static void gameComplete(TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton, TextView turnCount) {
+    protected static void gameComplete(TextView lyricString, Context context, Button nextButton, Button homeButton, Button playAgainButton, TextView turnCount) {
         //display "Game complete!"
         lyricString.setText(context.getString(R.string.game_complete));
         //hide unused buttons
@@ -87,7 +60,7 @@ public class SharedCode {
      * Method to reset the tempSongs list
      * @param ArrayList<String> tempSongs, ArrayList<String> resetList, int goCount
      */
-    public static ArrayList<String> resetList(ArrayList<String> tempSongs, ArrayList<String> resetList, int goCount) {
+    protected static ArrayList<String> resetList(ArrayList<String> tempSongs, ArrayList<String> resetList, int goCount) {
         // when list size is less than the number of turns in a round, reset the list
         if (tempSongs.size() <= goCount) {
             tempSongs.clear();
@@ -101,7 +74,7 @@ public class SharedCode {
      * Method to load and show an interstitial advert
      * @param InterstitialAd mInterstitialAd, Context context
      */
-    public static void showAd(InterstitialAd mInterstitialAd) {
+    protected static void showAd(InterstitialAd mInterstitialAd) {
         //display interstitial ad
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
@@ -115,7 +88,7 @@ public class SharedCode {
      * Method to load an interstitial advert
      * @param Context context
      */
-    public static InterstitialAd loadAd(Context context) {
+    protected static InterstitialAd loadAd(Context context) {
         InterstitialAd mInterstitialAd = new InterstitialAd(context);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
@@ -127,7 +100,7 @@ public class SharedCode {
      * Method to restart the game
      * @param Button nextButton, Button playAgainButton, Button homeButton
      */
-    public static int playAgain(Button nextButton, Button playAgainButton, Button homeButton, TextView turnCount) {
+    protected static int playAgain(Button nextButton, Button playAgainButton, Button homeButton, TextView turnCount) {
         //reset the round number
         int count = 0;
         //display next button
@@ -144,22 +117,7 @@ public class SharedCode {
      * Method to return to the MainActivity
      * @param Context context
      */
-    public static void goHome(Context context) {
+    protected static void goHome(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
-
-    /*
-     * Method to unlock level.
-     */
-    public void unlockLevel(Button levelButton, final Context context, final Class destination, final int level) {
-        //get previous level
-        Integer prevLevel = level-1;
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        //check if preferences contains previous level
-        if(preferences.contains("Level completed " + prevLevel)) {
-            //unlock button
-            configureLevelButton(levelButton, context, destination, level);
-        }
-    }
 }
-

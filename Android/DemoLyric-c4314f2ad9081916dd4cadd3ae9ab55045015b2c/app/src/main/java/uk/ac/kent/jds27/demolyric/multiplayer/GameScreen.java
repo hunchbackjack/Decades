@@ -2,7 +2,6 @@ package uk.ac.kent.jds27.demolyric.multiplayer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,22 +12,19 @@ import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 
+import uk.ac.kent.jds27.demolyric.Game;
 import uk.ac.kent.jds27.demolyric.R;
-import uk.ac.kent.jds27.demolyric.SharedCode;
 
 /*
  * Class to deal with the game functions
  */
-public class GameScreen extends AppCompatActivity {
+public class GameScreen extends Game {
 
     //interstitial ad to load after game complete
     private InterstitialAd mInterstitialAd;
 
     //variable to access the lyrics
     private final LyricAndAnswers la = new LyricAndAnswers();
-
-    //variable to access shared code
-    private final SharedCode access = new SharedCode();
 
     //list to store all the current lyrics
     private ArrayList<String> tempSongs = new ArrayList<>();
@@ -97,7 +93,7 @@ public class GameScreen extends AppCompatActivity {
         haveGo();
 
         //load interstitial ad
-        mInterstitialAd = SharedCode.loadAd(this);
+        mInterstitialAd = loadAd(this);
     }
 
     /*
@@ -117,15 +113,16 @@ public class GameScreen extends AppCompatActivity {
         //check if round number is greater than total number of rounds
         if (count > goCount) {
             //show an advert
-            SharedCode.showAd(mInterstitialAd);
+            showAd(mInterstitialAd);
             //load new advert for next time
-            mInterstitialAd = SharedCode.loadAd(this);
+            mInterstitialAd = loadAd(this);
             //change to game complete screen
-            SharedCode.gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
+            gameComplete(lyricString, this, nextButton, homeButton, playAgainButton, turnCount);
             //check if there's enough songs in list to do another round
             if (tempSongs.size() < goCount) {
                 //reset the song list
-                tempSongs = SharedCode.resetList(tempSongs, resetList, goCount);
+                //noinspection ConstantConditions
+                tempSongs = resetList(tempSongs, resetList, goCount);
             }
         }
         //if round number is less than total number of rounds initiate a new round
@@ -135,7 +132,7 @@ public class GameScreen extends AppCompatActivity {
             //make listSize equal to total number of songs left in tempSongs
             listSize = tempSongs.size();
             //get new song string
-            String turn = access.getLyric(tempSongs);
+            String turn = getLyric(tempSongs);
             //display the new song
             lyricString.setText(turn);
             //initiate a new count down
@@ -168,7 +165,7 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //reset round number and call playAgain function
-                count = SharedCode.playAgain(nextButton, playAgainButton, homeButton, turnCount);
+                count = playAgain(nextButton, playAgainButton, homeButton, turnCount);
                 //set lyric string to random lyric
                 haveGo();
             }
@@ -178,7 +175,7 @@ public class GameScreen extends AppCompatActivity {
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedCode.goHome(GameScreen.this);
+                goHome(GameScreen.this);
             }
         });
 
