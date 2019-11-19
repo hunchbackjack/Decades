@@ -30,6 +30,9 @@ import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.SixList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.TenList;
 import uk.ac.kent.jds27.demolyric.singleplayer.decadelists.TwentyList;
 
+/*
+ * Class to handle single player game screen.
+ */
 public class GameScreenSingle extends Game {
 
     //shared preference to reference levels completed
@@ -298,13 +301,18 @@ public class GameScreenSingle extends Game {
             //catch null pointer exception
             if (turn != null) {
                 //split string to get just the lyric
+                //works more efficiently than storing values in separate arrays for
+                //memory management and data accuracy
                 String[] turnList = turn.split(System.lineSeparator());
+                //turnList is an array, lyric is value at 0 in array
                 String lyric = turnList[0];
-                //get song name
+                //get song name, value at 3 in the array
                 String[] answer = turnList[3].split(" - ");
+                //answer is an array, song name is value at 0 in array
                 songName = answer[0];
-                //split string to get the artist
+                //split string to get the artist, value at 1 in array
                 String[] getArtist = answer[1].split(" \\(");
+                //getArtist is an array, the song artist is value at 0 in array
                 songArtist = getArtist[0];
                 //display the lyric
                 lyricString.setText(lyric);

@@ -263,7 +263,7 @@ public class GameScreen extends Game {
      * Method to add songs from specified decades into the game.
      * @param ArrayList<String> array
      */
-    private void addDecade(ArrayList<String> array) {
+    private void addSongs(ArrayList<String> array) {
         tempSongs.addAll(array);
         resetList.addAll(array);
     }
@@ -273,25 +273,25 @@ public class GameScreen extends Game {
      */
     private void checkDecades() {
         if (DecadeSelect.fiveClicked) {
-            addDecade(la.getFiveList());
+            addSongs(la.getFiveList());
         }
         if (DecadeSelect.sixClicked) {
-            addDecade(la.getSixList());
+            addSongs(la.getSixList());
         }
         if (DecadeSelect.sevenClicked) {
-            addDecade(la.getSevenList());
+            addSongs(la.getSevenList());
         }
         if (DecadeSelect.eightClicked) {
-            addDecade(la.getEightList());
+            addSongs(la.getEightList());
         }
         if (DecadeSelect.nineClicked) {
-            addDecade(la.getNineList());
+            addSongs(la.getNineList());
         }
         if (DecadeSelect.twentyClicked) {
-            addDecade(la.getTwentyList());
+            addSongs(la.getTwentyList());
         }
         if (DecadeSelect.tenClicked) {
-            addDecade(la.getTenList());
+            addSongs(la.getTenList());
         }
     }
 }

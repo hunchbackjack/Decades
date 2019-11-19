@@ -2,6 +2,10 @@ package uk.ac.kent.jds27.demolyric.singleplayer.decadelists;
 
 import java.util.ArrayList;
 
+/*
+ * Class to store songs from the 90's.
+ * Each level split into different arraylist to prevent unnecessary memory use.
+ */
 public class NinetyList {
     //list to store level 1
     private final ArrayList<String> level1 = new ArrayList<>();
