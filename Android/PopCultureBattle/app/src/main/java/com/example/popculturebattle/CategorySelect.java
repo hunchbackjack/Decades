@@ -15,11 +15,14 @@ public class CategorySelect extends AppCompatActivity {
     public static boolean musicClicked;
     public static boolean historyClicked;
     public static boolean genClicked;
+    public static boolean battleClicked;
 
     private Button filmButton;
     private Button musicButton;
     private Button historyButton;
     private Button genButton;
+    private Button battleButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,14 @@ public class CategorySelect extends AppCompatActivity {
         musicButton = findViewById(R.id.sixButton);
         historyButton = findViewById(R.id.sevenButton);
         genButton = findViewById(R.id.eightButton);
+        battleButton = findViewById(R.id.nineButton);
 
         //initialise booleans
         filmClicked = false;
         musicClicked = false;
         historyClicked = false;
         genClicked = false;
+        battleClicked = false;
 
         configureButtons();
     }
@@ -68,6 +73,13 @@ public class CategorySelect extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 genClicked = true;
+                startActivity(new Intent(CategorySelect.this, GameScreen.class));
+            }
+        });
+        battleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                battleClicked = true;
                 startActivity(new Intent(CategorySelect.this, GameScreen.class));
             }
         });

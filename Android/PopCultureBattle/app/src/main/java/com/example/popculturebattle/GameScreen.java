@@ -3,6 +3,7 @@ package com.example.popculturebattle;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class GameScreen extends AppCompatActivity {
@@ -30,6 +32,8 @@ public class GameScreen extends AppCompatActivity {
         question = findViewById(R.id.questionString);
         nextButton = findViewById(R.id.nextButton);
 
+        question.setMovementMethod(new ScrollingMovementMethod());
+
         //set methods for all buttons
         configureButtons();
 
@@ -45,6 +49,9 @@ public class GameScreen extends AppCompatActivity {
         }
         else if (CategorySelect.genClicked) {
             haveGo(MainActivity.genList);
+        }
+        else if (CategorySelect.battleClicked) {
+            haveGo(MainActivity.battleList);
         }
     }
 

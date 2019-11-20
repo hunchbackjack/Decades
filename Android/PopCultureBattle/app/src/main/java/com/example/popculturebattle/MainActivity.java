@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<String> musicList = new ArrayList<>();
     public static ArrayList<String> historyList = new ArrayList<>();
     public static ArrayList<String> genList = new ArrayList<>();
+    public static ArrayList<String> battleList = new ArrayList<>();
 
     public QuestionsAndAnswers qa = new QuestionsAndAnswers();
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         musicList.addAll(qa.getMusicList());
         historyList.addAll(qa.getHistoryList());
         genList.addAll(qa.getGenList());
+        battleList.addAll(qa.getBattleList());
     }
 
 }

@@ -8,6 +8,7 @@ public class QuestionsAndAnswers {
     private ArrayList<String> historyList = new ArrayList<>();
     private ArrayList<String> musicList = new ArrayList<>();
     private ArrayList<String> genList = new ArrayList<>();
+    private ArrayList<String> battleList = new ArrayList<>();
 
     QuestionsAndAnswers() {
 
@@ -31,6 +32,7 @@ public class QuestionsAndAnswers {
         genList.add("Often considered one of the greatest video games of its generation, \"GoldenEye 007\" was released in 1997 for which gaming system?" + System.lineSeparator() + System.lineSeparator() + "A. Playstation, B. Dreamcast, C. Xbox, D. Nintendo 64" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "D. Nintendo 64");
         genList.add("The Pokemon video game craze began in the United States in 1998, when these two versions of the franchise were released on Game Boy." + System.lineSeparator() + System.lineSeparator() + "A. Red and Blue, B. Green and Yellow, C. Gold and Silver, D. Ruby and Emerald" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "A. Red and Blue");
         genList.add("How many stripes are on the American flag?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "13. The 13 stripes represents the thirteen British colonies that declared independence from the Kingdom of Great Britain.");
+        genList.add("Which Jamaican runner is an 11-time world champion and holds the record in the 100 and 200-meter race?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Usain Bolt");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
@@ -69,22 +71,21 @@ public class QuestionsAndAnswers {
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
-//        genList.add("" + System.lineSeparator() + System.lineSeparator() + "A. , B. , C. , D. " + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
+        genList.add("By area, which is the largest continent on the planet?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Asia");
+        genList.add("What is the smallest country in the world?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Vatican City");
+        genList.add("Which of the Seven Wonders of the ancient world is located in Egypt?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "The Pyramids of Giza");
+        genList.add("What’s the primary ingredient in hummus?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Chickpeas");
+        genList.add("Which kind of alcohol is Russia notoriously known for?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Vodka");
+        genList.add("Which country invented tea?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "China");
+        genList.add("What is the common name for dried plums?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Prunes");
+        genList.add("Which country produces the most coffee in the world?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Brazil");
+        genList.add("What does BMW stand for (in English)?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Bavarian Motor Works");
+        genList.add("Which car company owns Bugatti, Lamborghini. Audi, Porsche and Ducati?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Volkswagen");
+        genList.add("Which animal can be seen on the Porsche logo?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Horse");
+        genList.add("Which natural disaster is measured with a Richter scale?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Earthquakes");
+        genList.add("Google Chrome, Safari, Firefox and Explorer are different types of what?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Web browser");
+        genList.add("What year was the very first model of the iPhone released?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "2007");
+        genList.add("Which of these is not an event in the Olympic decathlon?" + System.lineSeparator() + System.lineSeparator() + "A. Hammer throw, B. Discus throw, C. Shot put, D. Javelin throw" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + "A. , B. , C. , D. " + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + "A. , B. , C. , D. " + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        genList.add("" + System.lineSeparator() + System.lineSeparator() + "A. , B. , C. , D. " + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
@@ -730,7 +731,13 @@ public class QuestionsAndAnswers {
 //        musicList.add("" + System.lineSeparator() + System.lineSeparator() + "A. , B. , C. , D. " + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 
 
-        // Music
+        battleList.add("Name the stars of Keeping Up With the Kardashians" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Kris Jenner"+ System.lineSeparator() + "Caitlyn Jenner" + System.lineSeparator() + "Kourtney Kardashian" + System.lineSeparator() + "Kim Kardashian West" + System.lineSeparator() + "Khloé Kardashian" + System.lineSeparator() + "Rob Kardashian" + System.lineSeparator() + "Kendall Jenner" + System.lineSeparator() + "Kylie Jenner");
+        battleList.add("Name all of the movies in the Star Wars saga" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Episode 1: The Phantom Menace"+ System.lineSeparator() + "Episode 2: Attack of the Clones" + System.lineSeparator() + "Episode 3: Revenge of the Sith" + System.lineSeparator() + "Episode 4: New Hope" + System.lineSeparator() + "Episode 5: Empire Strikes Back" + System.lineSeparator() + "Episode 6: Return of the Jedi" + System.lineSeparator() + "Episode 7: The Force Awakens" + System.lineSeparator() + "Episode 8: The Last Jedi" + System.lineSeparator() + "Episode 9: Rise of Skywalker" + System.lineSeparator() + "Rogue One: A Star Wars Story" + System.lineSeparator() + "Solo: A Star Wars Story");
+        battleList.add("Name the 10 richest people in the world" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Jeff Bezos" + System.lineSeparator() + "Bill Gates" + System.lineSeparator() + "Bernard Arnault" + System.lineSeparator() + "Warren Buffett" + System.lineSeparator() + "Amancio Ortega" + System.lineSeparator() + "Larry Ellison" + System.lineSeparator() + "Mark Zuckerberg" + System.lineSeparator() + "Carlos Slim Helu" + System.lineSeparator() + "Larry Page" + System.lineSeparator() + "Francoise Bettencourt Meyers");
+        battleList.add("Name the top 10 best-selling books of all time" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "The Lord of the Rings" + System.lineSeparator() + "The Alchemist" + System.lineSeparator() + "The Little Prince" + System.lineSeparator() + "Grimms' Fairy Tales" + System.lineSeparator() + "Harry Potter and the Philosopher's Stone" + System.lineSeparator() + "The Hobbit" + System.lineSeparator() + "And Then There Were None" + System.lineSeparator() + "Dream of the Red Chamber" + System.lineSeparator() + "The Lion, the Witch, and the Wardrobe" + System.lineSeparator() + "She: A History of Adventure");
+        battleList.add("Name the top 10 highest grossing movies of all time" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Avengers: Endgame" + System.lineSeparator() + "Avatar" + System.lineSeparator() + "Titanic" + System.lineSeparator() + "Star Wars: The Force Awakens" + System.lineSeparator() + "Avengers: Infinity War" + System.lineSeparator() + "Jurassic World" + System.lineSeparator() + "The Avengers" + System.lineSeparator() + "Fast & Furious 7" + System.lineSeparator() + "Avengers: Age of Ultron" + System.lineSeparator() + "Black Panther");
+        battleList.add("Name the top 10 best selling albums of all time" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Eagles — \"Their Greatest Hits (1971-1975)\"" + System.lineSeparator() + "Michael Jackson — \"Thriller\"" + System.lineSeparator() + "Eagles — \"Hotel California\"" + System.lineSeparator() + "Billy Joel — \"Greatest Hits Volume 1 & Volume 2\"" + System.lineSeparator() + "Led Zeppelin — \"Led Zeppelin IV\"" + System.lineSeparator() + "Pink Floyd — \"The Wall\"" + System.lineSeparator() + "AC/DC — \"Back In Black\"" + System.lineSeparator() + "Garth Brooks — \"Double Live\"" + System.lineSeparator() + "Hootie & The Blowfish — \"Cracked Rear View\"" + System.lineSeparator() + "Fleetwood Mac — \"Rumours\"");
+
         // TV
         //// friends //
         //// how i met your mother //
@@ -784,6 +791,10 @@ public class QuestionsAndAnswers {
 
     ArrayList<String> getGenList() {
         return genList;
+    }
+
+    ArrayList<String> getBattleList() {
+        return battleList;
     }
 
 
