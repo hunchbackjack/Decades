@@ -657,7 +657,7 @@ public class QuestionsAndAnswers {
         musicList.add("What's Cardi B's real name?" + System.lineSeparator() + System.lineSeparator() + "A. Alicia De la Cruz, B. Belcalis Almanzar, C. Mercedes Mejía, D. Aliya Reyes" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "B. Belcalis Almanzar");
         musicList.add("Where is Rihanna originally from?" + System.lineSeparator() + System.lineSeparator() + "A. Venezuela, B. South Africa, C. Barbados, D. Mauritius" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "C. Barbados");
         musicList.add("What year did the Sydney Opera House open to the public?" + System.lineSeparator() + System.lineSeparator() + "A. 1955, B. 1964, C. 1973, D. 1982" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "C. 1973");
-//        musicList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
+        musicList.add("Pop rap duo PJ & Duncan are now better known by what names?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Ant & Dec");
 //        musicList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        musicList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        musicList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
