@@ -452,7 +452,7 @@ public class QuestionsAndAnswers {
         filmTVList.add("'Nobody puts baby in the corner' is a line from which 1987 movie?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Dirty Dancing");
         filmTVList.add("How many Oscar nominations has Jennifer Lawrence had?" + System.lineSeparator() + System.lineSeparator() + "A. 2, B. 3, C. 4, D. 5" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "C. 4");
         filmTVList.add("How old is Baby in the movie Dirty Dancing?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "18");
-//        filmTVList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
+        filmTVList.add("Who plays Clark Kent in the TV show Smallville?" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "Tom Welling");
 //        filmTVList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        filmTVList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
 //        filmTVList.add("" + System.lineSeparator() + System.lineSeparator() + System.lineSeparator() + "");
