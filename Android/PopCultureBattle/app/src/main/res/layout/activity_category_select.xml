@@ -14,15 +14,14 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/colorPrimary"
-            android:onClick="addDecade"
+            android:background="#A8C40C"
             android:text="@string/general"
             android:textColor="@android:color/background_light"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/sevenButton"
-            app:layout_constraintTop_toBottomOf="@+id/sixButton" />
+            app:layout_constraintTop_toBottomOf="@+id/sixButton"/>
 
     <Button
             android:id="@+id/nineButton"
@@ -31,7 +30,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
-            android:onClick="addDecade"
             android:text="@string/battle"
             android:textColor="@android:color/background_light"
             android:visibility="visible"
@@ -47,15 +45,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@color/colorPrimary"
-            android:onClick="addDecade"
+            android:background="#008CFF"
             android:text="@string/history"
             android:textColor="@android:color/background_light"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/eightButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fiveButton" />
+            app:layout_constraintTop_toBottomOf="@+id/fiveButton"/>
 
     <Button
             android:id="@+id/sixButton"
@@ -64,15 +61,14 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@color/colorPrimary"
-            android:onClick="addDecade"
+            android:background="#F0E10C"
             android:text="@string/music"
             android:textColor="@android:color/background_light"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/fiveButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
             android:id="@+id/fiveButton"
@@ -82,13 +78,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@color/colorPrimary"
-            android:onClick="addDecade"
+            android:background="#F11D6E"
             android:text="@string/film"
             android:textColor="@android:color/background_light"
             android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/sixButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 </android.support.constraint.ConstraintLayout>
